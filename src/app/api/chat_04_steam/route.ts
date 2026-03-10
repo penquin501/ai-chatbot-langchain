@@ -16,16 +16,17 @@ export async function POST(req: NextRequest) {
         // ดึงข้อความจาก request body ที่ส่งมาจาก useChat hook
         const { messages }: { messages: UIMessage[] } = await req.json()
 
-        // สร้าง Prompt Template เพื่อกำหนดบทบาทและรูปแบบการตอบของ AI
-        // const prompt = ChatPromptTemplate.fromMessages([
-        //     ["system", "You are a helpful and friendly AI assistant."],
-        //     // แปลง UIMessage ให้เป็นรูปแบบที่ LangChain เข้าใจ
-        //     ...convertToModelMessages(messages),
-        // ])
         const modelMessages = await convertToModelMessages(messages);
+        const langChainMessages = modelMessages.map((m) => {
+            return [
+                m.role,
+                typeof m.content === 'string' ? m.content : JSON.stringify(m.content)
+            ] as [string, string];
+        });
+
         const prompt = ChatPromptTemplate.fromMessages([
             ["system", "You are a helpful and friendly AI assistant."],
-            ...modelMessages,
+            ...langChainMessages, // ตอนนี้จะเป็น [role, content][] ซึ่ง LangChain ชอบมาก
         ]);
 
         // เลือกรุ่นของโมเดล OpenAI ที่ต้องการใช้

@@ -17,17 +17,24 @@ export async function POST(req: NextRequest) {
         const { messages }: { messages: UIMessage[] } = await req.json()
 
         const modelMessages = await convertToModelMessages(messages);
+        const langChainMessages = modelMessages.map((m) => {
+            return [
+                m.role,
+                typeof m.content === 'string' ? m.content : JSON.stringify(m.content)
+            ] as [string, string];
+        });
 
+        const prompt = ChatPromptTemplate.fromMessages([
+            ["system", "You are a helpful and friendly AI assistant."],
+            ...langChainMessages, // ตอนนี้จะเป็น [role, content][] ซึ่ง LangChain ชอบมาก
+        ]);
         // สร้าง Prompt Template เพื่อกำหนดบทบาทและรูปแบบการตอบของ AI
         // const prompt = ChatPromptTemplate.fromMessages([
         //     ["system", "You are a helpful and friendly AI assistant."],
         //     // แปลง UIMessage ให้เป็นรูปแบบที่ LangChain เข้าใจ
         //     ...convertToModelMessages(messages),
         // ])
-        const prompt = ChatPromptTemplate.fromMessages([
-            ["system", "You are a helpful and friendly AI assistant."],
-            ...modelMessages,
-        ]);
+
 
         // เลือกรุ่นของโมเดล OpenAI ที่ต้องการใช้
         const model = new ChatOpenAI({
