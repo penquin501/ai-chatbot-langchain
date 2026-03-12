@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import { Anuphan, Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/lib/theme-provider";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -38,7 +39,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       > */}
       <body className={`${anuphan.variable} ${inter.variable}`}>
-        {children}
+        <ThemeProvider defaultTheme="system" storageKey="ai-chatbot-theme">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
