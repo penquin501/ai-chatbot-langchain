@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { ChatSidebar } from "@/components/chat-sidebar";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { ChatProvider } from "@/contexts/chat-context";
 
 export default async function ChatLayout({
   children,
@@ -13,5 +16,20 @@ export default async function ChatLayout({
     redirect("/auth/login");
   }
 
-  return <div className="flex flex-col h-screen">{children}</div>;
+  const userInfo = {
+    display_name:
+      data.user.user_metadata?.display_name ||
+      data.user.email?.split("@")[0] ||
+      "User",
+    email: data.user.user_metadata?.email || data.user.email || "",
+  };
+
+  return (
+    <ChatProvider>
+      <SidebarProvider>
+        <ChatSidebar {...userInfo} />
+        <SidebarInset>{children}</SidebarInset>
+      </SidebarProvider>
+    </ChatProvider>
+  );
 }
