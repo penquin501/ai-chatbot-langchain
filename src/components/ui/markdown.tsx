@@ -4,6 +4,8 @@ import { memo, useId, useMemo } from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import { CodeBlock, CodeBlockCode } from "./code-block";
 import {
   Table,
@@ -24,6 +26,23 @@ export type MarkdownProps = {
 function parseMarkdownIntoBlocks(markdown: string): string[] {
   const tokens = marked.lexer(markdown);
   return tokens.map((token) => token.raw);
+}
+
+// Convert AI supplied LaTeX delimiters \( ... \) and \[ ... \] to
+// remark-math compatible $...$ and $$...$$ while skipping code fences.
+function normalizeLatexDelimiters(markdown: string): string {
+  const segments = markdown.split(/(```[\s\S]*?```)/g);
+  return segments
+    .map((segment) => {
+      if (segment.startsWith("```")) return segment; // skip code blocks
+      return segment
+        .replace(
+          /\\\[((?:.|\n)+?)\\\]/g,
+          (_, expr: string) => `\n\n$$${expr.trim()}$$\n\n`
+        )
+        .replace(/\\\((.+?)\\\)/g, (_, expr: string) => `$${expr.trim()}$`);
+    })
+    .join("");
 }
 
 function extractLanguage(className?: string): string {
@@ -85,6 +104,21 @@ const INITIAL_COMPONENTS: Partial<Components> = {
   td: function TableCellComponent({ children }) {
     return <TableCell>{children}</TableCell>;
   },
+  ol: function OrderedListComponent({ children }) {
+    return (
+      <ol className="list-decimal list-outside space-y-1 my-4 ml-6">
+        {children}
+      </ol>
+    );
+  },
+  ul: function UnorderedListComponent({ children }) {
+    return (
+      <ul className="list-disc list-outside space-y-1 my-4 ml-6">{children}</ul>
+    );
+  },
+  li: function ListItemComponent({ children }) {
+    return <li className="pl-2">{children}</li>;
+  },
 };
 
 const MemoizedMarkdownBlock = memo(
@@ -97,7 +131,8 @@ const MemoizedMarkdownBlock = memo(
   }) {
     return (
       <ReactMarkdown
-        remarkPlugins={[remarkGfm, remarkBreaks]}
+        remarkPlugins={[remarkGfm, remarkBreaks, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
         components={components}
       >
         {content}
@@ -119,7 +154,14 @@ function MarkdownComponent({
 }: MarkdownProps) {
   const generatedId = useId();
   const blockId = id ?? generatedId;
-  const blocks = useMemo(() => parseMarkdownIntoBlocks(children), [children]);
+  const normalized = useMemo(
+    () => normalizeLatexDelimiters(children),
+    [children]
+  );
+  const blocks = useMemo(
+    () => parseMarkdownIntoBlocks(normalized),
+    [normalized]
+  );
 
   return (
     <div className={className}>

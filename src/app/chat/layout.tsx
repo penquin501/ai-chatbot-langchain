@@ -22,6 +22,7 @@ export default async function ChatLayout({
       data.user.email?.split("@")[0] ||
       "User",
     email: data.user.user_metadata?.email || data.user.email || "",
+    userId: data.user.id, // เพิ่ม userId
   };
 
   return (
