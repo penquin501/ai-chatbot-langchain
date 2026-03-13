@@ -197,8 +197,11 @@ export function NewChat() {
 
     try {
       // เรียก API เพื่อดึงประวัติการสนทนา
+      // const response = await fetch(
+      //   `/api/chat_05_history?sessionId=${sessionIdToLoad}`
+      // );
       const response = await fetch(
-        `/api/chat_05_history?sessionId=${sessionIdToLoad}`
+        `/api/chat_06_history_optimistic?sessionId=${sessionIdToLoad}`
       );
 
       // ตรวจสอบว่า API response สำเร็จหรือไม่
@@ -273,7 +276,8 @@ export function NewChat() {
      * - บันทึก session ID ไว้ใน localStorage
      */
     transport: createCustomChatTransport({
-      api: "/api/chat_05_history", // API endpoint สำหรับส่งข้อความ
+      // api: "/api/chat_05_history", // API endpoint สำหรับส่งข้อความ
+      api: "/api/chat_06_history_optimistic", // API endpoint สำหรับส่งข้อความ
 
       /**
        * Callback function ที่ทำงานเมื่อได้รับ response
