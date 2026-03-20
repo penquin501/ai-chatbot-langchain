@@ -3,18 +3,18 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { cn } from "@/lib/utils";
-import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
+import { cn } from "../lib/utils";
+import { createClient } from "../lib/supabase/client";
+import { Button } from "./ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "./ui/card";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import Link from "next/link";
 
 export function LoginForm({
@@ -49,6 +49,11 @@ export function LoginForm({
     }
   };
 
+  const handleFillDemo = () => {
+    setEmail("abc@mail.com");
+    setPassword("123456");
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -57,6 +62,23 @@ export function LoginForm({
           <CardDescription>
             Enter your email below to login to your account
           </CardDescription>
+          <div className="mt-2 px-4 bg-yellow-300 p-2 rounded-lg">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-800">Email: abc@mail.com</p>
+                <p className="text-sm text-gray-800">Password: 123456</p>
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleFillDemo}
+                className="ml-2 bg-white hover:bg-gray-50"
+              >
+                Auto Fill
+              </Button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin}>
@@ -69,6 +91,8 @@ export function LoginForm({
                   placeholder="m@example.com"
                   required
                   value={email}
+                  autoComplete="email"
+                  tabIndex={1}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -87,11 +111,18 @@ export function LoginForm({
                   type="password"
                   required
                   value={password}
+                  autoComplete="current-password"
+                  tabIndex={2}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button
+                type="submit"
+                className="w-full"
+                tabIndex={3}
+                disabled={isLoading}
+              >
                 {isLoading ? "Logging in..." : "Login"}
               </Button>
             </div>

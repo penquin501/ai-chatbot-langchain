@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { HelpCircle } from "lucide-react"
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import { useState } from "react";
+import { HelpCircle } from "lucide-react";
 
 export function PersonalizationTab() {
-  const [savedMemories, setSavedMemories] = useState(true)
-  const [chatHistory, setChatHistory] = useState(true)
-  const [recordHistory, setRecordHistory] = useState(true)
+  const [savedMemories, setSavedMemories] = useState(true);
+  const [chatHistory, setChatHistory] = useState(true);
+  const [recordHistory, setRecordHistory] = useState(true);
 
   return (
     <div className="space-y-6">
@@ -38,12 +38,12 @@ export function PersonalizationTab() {
             <button
               onClick={() => setSavedMemories(!savedMemories)}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                savedMemories ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
+                savedMemories ? "bg-blue-600" : "bg-gray-300 dark:bg-gray-600"
               }`}
             >
               <span
                 className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                  savedMemories ? 'translate-x-6' : 'translate-x-1'
+                  savedMemories ? "translate-x-6" : "translate-x-1"
                 }`}
               />
             </button>
@@ -60,12 +60,12 @@ export function PersonalizationTab() {
             <button
               onClick={() => setChatHistory(!chatHistory)}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                chatHistory ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
+                chatHistory ? "bg-blue-600" : "bg-gray-300 dark:bg-gray-600"
               }`}
             >
               <span
                 className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                  chatHistory ? 'translate-x-6' : 'translate-x-1'
+                  chatHistory ? "translate-x-6" : "translate-x-1"
                 }`}
               />
             </button>
@@ -85,7 +85,8 @@ export function PersonalizationTab() {
           </div>
 
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Genius AI may use Memory to personalize queries to search providers, such as Bing.{" "}
+            Genius AI may use Memory to personalize queries to search providers,
+            such as Bing.{" "}
             <button className="text-blue-600 hover:text-blue-700 underline">
               Learn more
             </button>
@@ -111,21 +112,22 @@ export function PersonalizationTab() {
             <button
               onClick={() => setRecordHistory(!recordHistory)}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                recordHistory ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
+                recordHistory ? "bg-blue-600" : "bg-gray-300 dark:bg-gray-600"
               }`}
             >
               <span
                 className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                  recordHistory ? 'translate-x-6' : 'translate-x-1'
+                  recordHistory ? "translate-x-6" : "translate-x-1"
                 }`}
               />
             </button>
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Let Genius AI reference all previous recording transcripts and notes when responding.
+            Let Genius AI reference all previous recording transcripts and notes
+            when responding.
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }

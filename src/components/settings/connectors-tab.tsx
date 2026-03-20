@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
 
 const connectors = [
   {
@@ -9,17 +9,17 @@ const connectors = [
     description: "Deep research, Agent mode",
     icon: "🐙",
     enabled: true,
-    hasSettings: false
+    hasSettings: false,
   },
   {
-    name: "Google Drive", 
+    name: "Google Drive",
     description: "Chat, Deep research, Agent mode, File uploads",
     icon: "📁",
     enabled: false,
     hasSettings: true,
-    settingsText: "Add chat, deep research"
-  }
-]
+    settingsText: "Add chat, deep research",
+  },
+];
 
 const availableConnectors = [
   { name: "Box", icon: "📦" },
@@ -33,8 +33,8 @@ const availableConnectors = [
   { name: "Notion", icon: "📝" },
   { name: "Microsoft Outlook", icon: "📧" },
   { name: "Microsoft Teams", icon: "💬" },
-  { name: "Codeium", icon: "💻" }
-]
+  { name: "Codeium", icon: "💻" },
+];
 
 export function ConnectorsTab() {
   return (
@@ -45,7 +45,8 @@ export function ConnectorsTab() {
           Enabled connectors
         </Label>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          Genius AI can access information from connected apps. Your permissions are always respected.{" "}
+          Genius AI can access information from connected apps. Your permissions
+          are always respected.{" "}
           <button className="text-blue-600 hover:text-blue-700 underline">
             Learn more
           </button>
@@ -53,7 +54,10 @@ export function ConnectorsTab() {
 
         <div className="space-y-3">
           {connectors.map((connector) => (
-            <div key={connector.name} className="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg">
+            <div
+              key={connector.name}
+              className="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-700 rounded-lg"
+            >
               <div className="flex items-center gap-3">
                 <span className="text-lg">{connector.icon}</span>
                 <div>
@@ -85,7 +89,7 @@ export function ConnectorsTab() {
         <Label className="text-sm font-medium text-gray-900 dark:text-white mb-4 block">
           Browse connectors
         </Label>
-        
+
         <div className="grid grid-cols-3 gap-3">
           {availableConnectors.map((connector) => (
             <button
@@ -101,5 +105,5 @@ export function ConnectorsTab() {
         </div>
       </div>
     </div>
-  )
+  );
 }

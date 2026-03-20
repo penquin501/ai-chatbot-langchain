@@ -1,8 +1,8 @@
 "use client";
 
-import { Label } from "@/components/ui/label";
+import { Label } from "../ui/label";
 import { useState } from "react";
-import { useTheme } from "@/lib/theme-provider";
+import { useTheme } from "../../lib/theme-provider";
 
 export function GeneralTab() {
   // const [theme, setTheme] = useState("system");

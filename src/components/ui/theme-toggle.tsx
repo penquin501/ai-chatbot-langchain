@@ -3,13 +3,9 @@
 import * as React from "react";
 import { Moon, Sun, Monitor } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { useTheme } from "@/lib/theme-provider";
+import { Button } from "./button";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { useTheme } from "../../lib/theme-provider";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();

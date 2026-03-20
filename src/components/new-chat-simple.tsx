@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 
-import { LogoutButton } from "@/components/logout-button";
-import { createClient } from "@/lib/supabase/client";
+import { LogoutButton } from "./logout-button";
+import { createClient } from "../lib/supabase/client";
 import { User } from "@supabase/supabase-js";
 
 export default function NewChatSimple() {

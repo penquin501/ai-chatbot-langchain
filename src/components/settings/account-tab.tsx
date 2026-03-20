@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import { useState } from "react";
 
 export function AccountTab() {
-  const [showName, setShowName] = useState(true)
+  const [showName, setShowName] = useState(true);
 
   return (
     <div className="space-y-6">
@@ -39,9 +39,10 @@ export function AccountTab() {
         <Label className="text-lg font-medium text-gray-900 dark:text-white mb-4 block">
           Genius AI builder profile
         </Label>
-        
+
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          Personalize your builder profile to connect with users of your Genius AIs. These settings apply to publicly shared Genius AIs.
+          Personalize your builder profile to connect with users of your Genius
+          AIs. These settings apply to publicly shared Genius AIs.
         </p>
 
         <div className="flex justify-end mb-4">
@@ -80,12 +81,12 @@ export function AccountTab() {
           <button
             onClick={() => setShowName(!showName)}
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-              showName ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
+              showName ? "bg-blue-600" : "bg-gray-300 dark:bg-gray-600"
             }`}
           >
             <span
               className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                showName ? 'translate-x-6' : 'translate-x-1'
+                showName ? "translate-x-6" : "translate-x-1"
               }`}
             />
           </button>
@@ -100,14 +101,18 @@ export function AccountTab() {
           <Label className="text-sm font-medium text-gray-900 dark:text-white mb-2 block">
             Links
           </Label>
-          
+
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <span className="text-sm">🌐</span>
               <div className="relative flex-1">
-                <select 
+                <select
                   className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none shadow-sm text-sm"
-                  style={{ WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' }}
+                  style={{
+                    WebkitAppearance: "none",
+                    MozAppearance: "none",
+                    appearance: "none",
+                  }}
                 >
                   <option value="">Select a domain</option>
                   <option value="website">Website</option>
@@ -118,10 +123,12 @@ export function AccountTab() {
                 </span>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <span className="text-sm">💼</span>
-              <span className="text-sm text-gray-900 dark:text-white">LinkedIn</span>
+              <span className="text-sm text-gray-900 dark:text-white">
+                LinkedIn
+              </span>
               <Button variant="outline" size="sm" className="ml-auto">
                 Add
               </Button>
@@ -130,5 +137,5 @@ export function AccountTab() {
         </div>
       </div>
     </div>
-  )
+  );
 }

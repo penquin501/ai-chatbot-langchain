@@ -17,8 +17,8 @@
 
 "use client";
 
-import { createClient } from "@/lib/supabase/client"; // Supabase client
-import { Button } from "@/components/ui/button"; // UI Button component
+import { createClient } from "../lib/supabase/client"; // Supabase client
+import { Button } from "./ui/button"; // UI Button component
 import { useRouter } from "next/navigation"; // Next.js router hook
 import { LogOut } from "lucide-react"; // Logout icon
 

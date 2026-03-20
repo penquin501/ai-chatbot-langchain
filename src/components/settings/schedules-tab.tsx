@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { HelpCircle } from "lucide-react"
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import { HelpCircle } from "lucide-react";
 
 export function SchedulesTab() {
   return (
@@ -15,13 +15,16 @@ export function SchedulesTab() {
       </div>
 
       <p className="text-sm text-gray-600 dark:text-gray-400">
-        Genius AI can be scheduled to run again after it completes a task. Choose{" "}
-        <strong>Schedule from the ⋯ menu in a conversation to set up future runs.</strong>
+        Genius AI can be scheduled to run again after it completes a task.
+        Choose{" "}
+        <strong>
+          Schedule from the ⋯ menu in a conversation to set up future runs.
+        </strong>
       </p>
 
       <Button variant="outline" size="sm">
         Manage
       </Button>
     </div>
-  )
+  );
 }

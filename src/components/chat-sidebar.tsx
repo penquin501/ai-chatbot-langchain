@@ -32,7 +32,7 @@
 // ============================================================================
 // IMPORTS - การนำเข้า Components และ Libraries ที่จำเป็น
 // ============================================================================
-import { Button } from "@/components/ui/button"; // Component ปุ่มพื้นฐาน
+import { Button } from "./ui/button"; // Component ปุ่มพื้นฐาน
 import {
   Sidebar,
   SidebarContent,
@@ -43,12 +43,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   useSidebar,
-} from "@/components/ui/sidebar"; // Sidebar components และ hooks
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"; // Popover สำหรับ user menu
+} from "./ui/sidebar"; // Sidebar components และ hooks
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"; // Popover สำหรับ user menu
 import {
   AlertDialog,
   AlertDialogAction,
@@ -58,7 +54,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"; // Alert dialog สำหรับยืนยันการลบ
+} from "./ui/alert-dialog"; // Alert dialog สำหรับยืนยันการลบ
 import {
   PlusIcon,
   Search,
@@ -74,14 +70,14 @@ import {
   UserCircle,
   Trash2,
 } from "lucide-react"; // Icons จาก Lucide React
-import { LogoutButton } from "@/components/logout-button"; // Component สำหรับ logout
+import { LogoutButton } from "./logout-button"; // Component สำหรับ logout
 import Link from "next/link"; // Next.js Link สำหรับ navigation
 import { usePathname, useRouter } from "next/navigation"; // Next.js hooks สำหรับ routing
 import { useState, useEffect, useRef } from "react"; // React hooks
 import { createPortal } from "react-dom"; // Portal สำหรับ modal rendering
-import { useChatContext } from "@/contexts/chat-context"; // Context สำหรับ chat state
-import { useChatSessions } from "@/hooks/use-chat-sessions"; // Custom hook สำหรับ chat sessions
-import { groupSessionsByDate } from "@/lib/utils"; // Utility สำหรับจัดกลุ่มตามวันที่
+import { useChatContext } from "../contexts/chat-context"; // Context สำหรับ chat state
+import { useChatSessions } from "../hooks/use-chat-sessions_achive"; // Custom hook สำหรับ chat sessions
+import { groupSessionsByDate } from "../lib/utils"; // Utility สำหรับจัดกลุ่มตามวันที่
 import {
   GeneralTab,
   NotificationsTab,
@@ -91,8 +87,8 @@ import {
   DataControlsTab,
   SecurityTab,
   AccountTab,
-} from "@/components/settings"; // Settings tab components
-import { ThemeToggle } from "@/components/ui/theme-toggle"; // Theme toggle component
+} from "./settings"; // Settings tab components
+import { ThemeToggle } from "./ui/theme-toggle"; // Theme toggle component
 
 // ============================================================================
 // TypeScript Interface Definitions - กำหนด Type Definitions

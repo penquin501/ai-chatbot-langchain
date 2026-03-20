@@ -27,27 +27,24 @@
 // IMPORTS - การนำเข้า Components และ Libraries ที่จำเป็น
 // ============================================================================
 import { useState, useRef, useEffect } from "react"; // React hooks สำหรับ DOM และ lifecycle
-import {
-  ChatContainerContent,
-  ChatContainerRoot,
-} from "@/components/ui/chat-container"; // Container สำหรับแสดงข้อความ chat
+import { ChatContainerContent, ChatContainerRoot } from "./ui/chat-container"; // Container สำหรับแสดงข้อความ chat
 import {
   Message,
   MessageAction,
   MessageActions,
   MessageContent,
-} from "@/components/ui/message"; // Components สำหรับแสดงข้อความ
+} from "./ui/message"; // Components สำหรับแสดงข้อความ
 import {
   PromptInput,
   PromptInputAction,
   PromptInputActions,
   PromptInputTextarea,
-} from "@/components/ui/prompt-input"; // Components สำหรับรับ input จากผู้ใช้
-import { ScrollButton } from "@/components/ui/scroll-button"; // ปุ่มสำหรับ scroll ไปข้างล่าง
-import { Button } from "@/components/ui/button"; // Component ปุ่มพื้นฐาน
-import { SidebarTrigger } from "@/components/ui/sidebar"; // ปุ่มสำหรับเปิด/ปิด sidebar
-import { ModelSelector } from "@/components/model-selector"; // Dropdown สำหรับเลือกโมเดล AI
-import { useChatHistory } from "@/hooks/use-chat-history"; // Custom hook สำหรับจัดการประวัติ chat
+} from "./ui/prompt-input"; // Components สำหรับรับ input จากผู้ใช้
+import { ScrollButton } from "./ui/scroll-button"; // ปุ่มสำหรับ scroll ไปข้างล่าง
+import { Button } from "./ui/button"; // Component ปุ่มพื้นฐาน
+import { SidebarTrigger } from "./ui/sidebar"; // ปุ่มสำหรับเปิด/ปิด sidebar
+import { ModelSelector } from "./model-selector"; // Dropdown สำหรับเลือกโมเดล AI
+import { useChatHistory } from "../hooks/use-chat-history_achive"; // Custom hook สำหรับจัดการประวัติ chat
 import {
   ArrowUp,
   Copy,
@@ -60,7 +57,7 @@ import {
   ThumbsUp,
   Trash,
 } from "lucide-react"; // Icons จาก Lucide React
-import { DEFAULT_MODEL } from "@/constants/models"; // โมเดล AI เริ่มต้น
+import { DEFAULT_MODEL } from "../constants/models"; // โมเดล AI เริ่มต้น
 
 // ============================================================================
 // TypeScript Interface Definitions - กำหนด Type Definitions

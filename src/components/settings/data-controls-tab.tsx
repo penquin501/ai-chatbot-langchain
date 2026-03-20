@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
 
 export function DataControlsTab() {
   return (
@@ -74,5 +74,5 @@ export function DataControlsTab() {
         </Button>
       </div>
     </div>
-  )
+  );
 }

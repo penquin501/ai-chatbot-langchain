@@ -1,25 +1,22 @@
 "use client";
 
-import {
-  ChatContainerContent,
-  ChatContainerRoot,
-} from "@/components/ui/chat-container";
+import { ChatContainerContent, ChatContainerRoot } from "./ui/chat-container";
 import {
   Message,
   MessageAction,
   MessageActions,
   MessageContent,
-} from "@/components/ui/message";
+} from "./ui/message";
 import {
   PromptInput,
   PromptInputAction,
   PromptInputActions,
   PromptInputTextarea,
-} from "@/components/ui/prompt-input";
-import { ScrollButton } from "@/components/ui/scroll-button";
-import { Button } from "@/components/ui/button";
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import { cn } from "@/lib/utils";
+} from "./ui/prompt-input";
+import { ScrollButton } from "./ui/scroll-button";
+import { Button } from "./ui/button";
+import { SidebarTrigger } from "./ui/sidebar";
+import { cn } from "../lib/utils";
 import {
   ArrowUp,
   Copy,
@@ -33,12 +30,12 @@ import {
   Trash,
 } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
-import { useChatContext } from "@/contexts/chat-context";
-import { ModelSelector } from "@/components/model-selector";
-import { DEFAULT_MODEL } from "@/constants/models";
+import { useChatContext } from "../contexts/chat-context";
+import { ModelSelector } from "./model-selector";
+import { DEFAULT_MODEL } from "../constants/models";
 import { useChat } from "@ai-sdk/react";
-import { createCustomChatTransport } from "@/lib/custom-chat-transport";
-import { createClient } from "@/lib/supabase/client";
+import { createCustomChatTransport } from "../lib/custom-chat-transport";
+import { createClient } from "../lib/supabase/client";
 
 interface MessageType {
   id: string; // ID ของข้อความ

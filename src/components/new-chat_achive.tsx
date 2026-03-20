@@ -23,27 +23,24 @@
 // ============================================================================
 // IMPORTS - การนำเข้า Components และ Libraries ที่จำเป็น
 // ============================================================================
-import {
-  ChatContainerContent,
-  ChatContainerRoot,
-} from "@/components/ui/chat-container"; // Container สำหรับแสดงข้อความ chat
+import { ChatContainerContent, ChatContainerRoot } from "./ui/chat-container"; // Container สำหรับแสดงข้อความ chat
 import {
   Message,
   MessageAction,
   MessageActions,
   MessageContent,
-} from "@/components/ui/message"; // Components สำหรับแสดงข้อความ
+} from "./ui/message"; // Components สำหรับแสดงข้อความ
 import {
   PromptInput,
   PromptInputAction,
   PromptInputActions,
   PromptInputTextarea,
-} from "@/components/ui/prompt-input"; // Components สำหรับรับ input จากผู้ใช้
-import { ScrollButton } from "@/components/ui/scroll-button"; // ปุ่มสำหรับ scroll ไปข้างล่าง
-import { Button } from "@/components/ui/button"; // Component ปุ่มพื้นฐาน
-import { SidebarTrigger } from "@/components/ui/sidebar"; // ปุ่มสำหรับเปิด/ปิด sidebar
-import { ModelSelector } from "@/components/model-selector"; // Dropdown สำหรับเลือกโมเดล AI
-import { cn } from "@/lib/utils"; // Utility สำหรับจัดการ CSS classes
+} from "./ui/prompt-input"; // Components สำหรับรับ input จากผู้ใช้
+import { ScrollButton } from "./ui/scroll-button"; // ปุ่มสำหรับ scroll ไปข้างล่าง
+import { Button } from "./ui/button"; // Component ปุ่มพื้นฐาน
+import { SidebarTrigger } from "./ui/sidebar"; // ปุ่มสำหรับเปิด/ปิด sidebar
+import { ModelSelector } from "./model-selector"; // Dropdown สำหรับเลือกโมเดล AI
+import { cn } from "../lib/utils"; // Utility สำหรับจัดการ CSS classes
 import {
   ArrowUp,
   Copy,
@@ -57,11 +54,11 @@ import {
   Trash,
 } from "lucide-react"; // Icons จาก Lucide React
 import { useRef, useState, useEffect } from "react"; // React Hooks
-import { useChatContext } from "@/contexts/chat-context"; // Context สำหรับจัดการสถานะ chat
+import { useChatContext } from "../contexts/chat-context"; // Context สำหรับจัดการสถานะ chat
 import { useChat } from "@ai-sdk/react"; // Hook สำหรับจัดการ AI chat
-import { createCustomChatTransport } from "@/lib/custom-chat-transport"; // Custom transport สำหรับส่งข้อมูล
-import { createClient } from "@/lib/supabase/client"; // Supabase client
-import { DEFAULT_MODEL } from "@/constants/models"; // โมเดล AI เริ่มต้น
+import { createCustomChatTransport } from "../lib/custom-chat-transport"; // Custom transport สำหรับส่งข้อมูล
+import { createClient } from "../lib/supabase/client"; // Supabase client
+import { DEFAULT_MODEL } from "../constants/models"; // โมเดล AI เริ่มต้น
 
 /**
  * Interface สำหรับ Message Object

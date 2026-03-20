@@ -5,11 +5,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+} from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
+import { cn } from "../lib/utils";
 import { ChevronDown } from "lucide-react";
-import { AVAILABLE_MODELS, type ModelOption } from "@/constants/models";
+import { AVAILABLE_MODELS, type ModelOption } from "../constants/models";
 
 interface ModelSelectorProps {
   selectedModel: string;
