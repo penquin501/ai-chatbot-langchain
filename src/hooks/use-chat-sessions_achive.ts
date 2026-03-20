@@ -163,7 +163,7 @@ export function useChatSessions(userId?: string) {
              * - sessions: array ของ ChatSession objects
              */
             // const response = await fetch(`/api/chat_05_history/session?userId=${encodeURIComponent(userId)}`)
-            const response = await fetch(`/api/chat_06_history_optimistic/session?userId=${encodeURIComponent(userId)}`)
+            const response = await fetch(`${API_BASE_SESSION}?userId=${encodeURIComponent(userId)}`)
 
             /**
              * ตรวจสอบ HTTP response status
@@ -288,7 +288,7 @@ export function useChatSessions(userId?: string) {
             //     },
             //     body: JSON.stringify({ title, userId }),                           // ข้อมูลสำหรับสร้าง session
             // })
-            const response = await fetch('/api/chat_06_history_optimistic/session', {
+            const response = await fetch(API_BASE_SESSION, {
                 method: 'POST',                                                     // HTTP POST method
                 headers: {
                     'Content-Type': 'application/json',                              // กำหนด content type
@@ -419,7 +419,7 @@ export function useChatSessions(userId?: string) {
             //     },
             //     body: JSON.stringify({ sessionId, title }),                        // ข้อมูลสำหรับอัปเดต
             // })
-            const response = await fetch('/api/chat_06_history_optimistic/session', {
+            const response = await fetch(API_BASE_SESSION, {
                 method: 'PUT',                                                      // HTTP PUT method
                 headers: {
                     'Content-Type': 'application/json',                              // กำหนด content type
@@ -505,7 +505,7 @@ export function useChatSessions(userId?: string) {
             // const response = await fetch(`/api/chat_05_history/session?sessionId=${sessionId}`, {
             //     method: 'DELETE',
             // })
-            const response = await fetch(`/api/chat_06_history_optimistic/session?sessionId=${sessionId}`, {
+            const response = await fetch(`${API_BASE_SESSION}?sessionId=${sessionId}`, {
                 method: 'DELETE',
             })
 

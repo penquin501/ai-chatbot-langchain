@@ -9,22 +9,23 @@ import { createClient } from "../lib/supabase/client";
 import { User } from "@supabase/supabase-js";
 
 export default function NewChatSimple() {
-  // State สำหรับเก็บข้อมูล user
   const [user, setUser] = useState<User | null>(null);
   const [displayName, setDisplayName] = useState<string>("");
+  const [input, setInput] = useState("");
+  const [currentSessionId, setCurrentSessionId] = useState<
+    string | undefined
+  >();
 
-  // ดึงข้อมูล user เมื่อ component mount
   useEffect(() => {
     const supabase = createClient();
 
-    // ดึงข้อมูล user ปัจจุบัน
     const getUser = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
       if (user) {
         setUser(user);
-        // ดึง display_name จาก user metadata
         const displayNameFromMeta =
           user.user_metadata?.display_name ||
           user.email?.split("@")[0] ||
@@ -35,39 +36,36 @@ export default function NewChatSimple() {
 
     getUser();
 
-    // Listen สำหรับการเปลี่ยนแปลง auth state
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         setUser(session.user);
+
         const displayNameFromMeta =
           session.user.user_metadata?.display_name ||
           session.user.email?.split("@")[0] ||
           "User";
+
         setDisplayName(displayNameFromMeta);
       } else {
         setUser(null);
         setDisplayName("");
+        setCurrentSessionId(undefined);
       }
     });
 
     return () => subscription.unsubscribe();
   }, []);
 
-  // ใช้ useChat hook เพื่อจัดการสถานะการสนทนา
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
-      api: "/api/chat_04_steam",
+      api: "/api/chat_07_tool_calling_postgres",
     }),
   });
 
-  // กำหนด state สำหรับ input text
-  const [input, setInput] = useState("");
-
   return (
     <div className="flex flex-col h-screen bg-gray-100">
-      {/* Header */}
       <div className="bg-white shadow-sm p-4 border-b">
         <h1 className="text-xl font-semibold text-gray-800 text-center">
           Genius AI Chatbot
@@ -83,19 +81,17 @@ export default function NewChatSimple() {
         </div>
       </div>
 
-      {/* Chat Messages Area */}
       <div className="flex-1 overflow-y-auto p-4">
         <div className="space-y-3 max-w-3xl mx-auto w-full h-full">
           {messages.length === 0 && (
             <div className="flex flex-col justify-center items-center text-center text-gray-500 h-full">
               <div>
-                <p className="text-lg">👋 สวัสดีครับ!</p>
+                <p className="text-lg">สวัสดีครับ!</p>
                 <p className="mt-2">เริ่มการสนทนาได้เลยครับ</p>
               </div>
             </div>
           )}
 
-          {/* แสดง Messages */}
           {messages.map((m) => (
             <div
               key={m.id}
@@ -123,29 +119,39 @@ export default function NewChatSimple() {
         </div>
       </div>
 
-      {/* Input Area */}
       <div className="bg-white border-t p-4">
         <div className="max-w-3xl mx-auto w-full">
-          {/* แสดงสถานะการพิมพ์ของ AI */}
           {(status === "submitted" || status === "streaming") && (
             <div className="text-gray-500 italic mb-2 text-sm">
-              🤔 AI กำลังคิด...
+              AI กำลังคิด...
             </div>
           )}
 
           <form
             className="flex items-center space-x-2"
-            onSubmit={(e) => {
-              e.preventDefault(); // ป้องกันหน้า refresh
-              if (!input.trim()) return; // ไม่ส่งถ้า input ว่าง
+            onSubmit={async (e) => {
+              e.preventDefault();
 
-              // เรียกใช้ sendMessage ที่ได้จาก useChat โดยตรง
-              sendMessage({
-                text: input,
-              });
+              if (!input.trim()) return;
+              if (!user?.id) {
+                console.error("userId not ready");
+                return;
+              }
 
-              // ล้างช่อง input หลังจากส่ง
+              const messageText = input;
               setInput("");
+
+              await sendMessage(
+                {
+                  text: messageText,
+                },
+                {
+                  body: {
+                    userId: user.id,
+                    sessionId: currentSessionId,
+                  },
+                }
+              );
             }}
           >
             <input
@@ -158,7 +164,7 @@ export default function NewChatSimple() {
             <button
               type="submit"
               className="p-3 bg-blue-500 text-white font-semibold rounded-full hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200"
-              disabled={status !== "ready" || !input.trim()}
+              disabled={status !== "ready" || !input.trim() || !user?.id}
             >
               <svg
                 className="w-5 h-5"

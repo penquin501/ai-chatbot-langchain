@@ -198,7 +198,7 @@ export function NewChat() {
       //   `/api/chat_05_history?sessionId=${sessionIdToLoad}`
       // );
       const response = await fetch(
-        `/api/chat_06_history_optimistic?sessionId=${sessionIdToLoad}`
+        `/api/chat_07_tool_calling_postgres?sessionId=${sessionIdToLoad}`
       );
 
       // ตรวจสอบว่า API response สำเร็จหรือไม่
@@ -274,7 +274,7 @@ export function NewChat() {
      */
     transport: createCustomChatTransport({
       // api: "/api/chat_05_history", // API endpoint สำหรับส่งข้อความ
-      api: "/api/chat_06_history_optimistic", // API endpoint สำหรับส่งข้อความ
+      api: "/api/chat_07_tool_calling_postgres", // API endpoint สำหรับส่งข้อความ
 
       /**
        * Callback function ที่ทำงานเมื่อได้รับ response
