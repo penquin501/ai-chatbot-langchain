@@ -92,9 +92,9 @@ const searchDocumentsTool = new DynamicStructuredTool({
     description: "ค้นหาข้อมูลจากเอกสารที่เก็บไว้ในระบบ เช่น ข้อมูลร้าน, สินค้า, การขาย, หรือข้อมูลอื่นๆ ที่อัปโหลดไว้ในรูปแบบ PDF, CSV, TXT",
     schema: z.object({
         query: z.string().describe("คำค้นหาสำหรับค้นหาข้อมูลในเอกสาร เช่น 'ข้อมูลร้าน', 'สินค้า', 'ราคา', 'การขาย' เป็นต้น"),
-        limit: z.number().optional().default(5).describe("จำนวนผลลัพธ์ที่ต้องการ (ค่าเริ่มต้น 5)")
+        limit: z.number().optional().default(50).describe("จำนวนผลลัพธ์ที่ต้องการ (ค่าเริ่มต้น 5)")
     }),
-    func: async ({ query, limit = 5 }) => {
+    func: async ({ query, limit = 50 }) => {
         console.log(`🔧 TOOL CALLED: search_documents with query="${query}", limit=${limit}`);
         try {
             // สร้าง vector store
